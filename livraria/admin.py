@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Autor, Categoria, Editora, Livro
+from .models import Autor, Categoria, Editora, Livro, Compra
 
 # Register your models here.
 @admin.register(Autor)
@@ -29,4 +29,8 @@ class LivroAdmin(admin.ModelAdmin):
     search_fields = ('titulo', 'editora_nome', 'categoria_descricao',)
     list_filter = ('editora', 'categoria')
     ordering = ('titulo', 'editora', 'categoria')
+
+@admin.register(Compra)
+class Compra(admin.ModelAdmin):
+    list_display = ("usuario", "status")
     list_per_page = 25
