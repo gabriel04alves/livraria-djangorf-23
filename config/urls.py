@@ -31,12 +31,14 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView
 )
+from usuario.views import UsuarioViewSet
 
 router = DefaultRouter()
 router.register(r'categorias', CategoriaViewSet)
 router.register(r'editoras', EditoraViewSet)
 router.register(r'autores', AutorViewSet)
 router.register(r'livros', LivroViewSet)
+router.register(r"usuarios", UsuarioViewSet)
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
