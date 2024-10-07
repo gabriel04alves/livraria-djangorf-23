@@ -30,11 +30,15 @@ class LivroAdmin(admin.ModelAdmin):
     list_filter = ('editora', 'categoria')
     ordering = ('titulo', 'editora', 'categoria')
 
+
+class ItensCompraInLine(admin.TabularInline):
+    model = ItensCompra
+
 @admin.register(Compra)
 class Compra(admin.ModelAdmin):
-    list_display = ("id", "usuario", "status")
-    list_per_page = 25
-    
+    class CompraAdmin(admin.ModelAdmin):
+        inlines = [ItensCompraInLine]
+            
 @admin.register(ItensCompra)
 class Compra(admin.ModelAdmin):
     list_display = ("id", "compra", "livro", "quantidade")
