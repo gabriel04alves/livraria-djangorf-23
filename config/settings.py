@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os 
+from datetime import timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -161,6 +162,11 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Livraria API",
     "DESCRIPTION": "API para gerenciamento de livraria, incluindo endpoints e documentação.",
     "VERSION": "1.0.0"
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=180),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
 
 AUTH_USER_MODEL = "usuario.Usuario"
