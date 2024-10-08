@@ -1,9 +1,10 @@
+from rest_framework import serializers
 from rest_framework.serializers import (
     CharField,
     CurrentUserDefault, 
     HiddenField, 
     ModelSerializer,
-    SerializerMethodField,
+    SerializerMethodField
 )
 from livraria.models import Compra, ItensCompra
 
@@ -42,6 +43,13 @@ class CriarEditarItensCompraSerializer(ModelSerializer):
     class Meta: 
         model = ItensCompra
         fields = ("livro", "quantidade")
+    
+    def validate(self, data):
+        if data["quantidade"] > data["livro"].quantidade:
+            raise serializers.ValidationError(
+                {"quantidade": "Quantidade solicitada não disponível em estoque."}
+            )
+        return data
 
 class CriarEditarCompraSerializer(ModelSerializer):
     usuario = HiddenField(default=CurrentUserDefault())
