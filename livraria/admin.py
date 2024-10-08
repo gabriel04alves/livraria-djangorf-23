@@ -26,7 +26,7 @@ class EditoraAdmin(admin.ModelAdmin):
 @admin.register(Livro)
 class LivroAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'editora', 'categoria')
-    search_fields = ('titulo', 'editora_nome', 'categoria_descricao',)
+    search_fields = ('titulo', 'editora__nome', 'categoria__descricao',)
     list_filter = ('editora', 'categoria')
     ordering = ('titulo', 'editora', 'categoria')
 
