@@ -1,4 +1,10 @@
-from rest_framework.serializers import ModelSerializer, CharField, SerializerMethodField
+from rest_framework.serializers import (
+    CharField,
+    CurrentUserDefault, 
+    HiddenField, 
+    ModelSerializer,
+    SerializerMethodField,
+)
 from livraria.models import Compra, ItensCompra
 
 class ItensCompraSerializer(ModelSerializer):
@@ -38,6 +44,7 @@ class CriarEditarItensCompraSerializer(ModelSerializer):
         fields = ("livro", "quantidade")
 
 class CriarEditarCompraSerializer(ModelSerializer):
+    usuario = HiddenField(default=CurrentUserDefault())
     itens = CriarEditarItensCompraSerializer(many=True)
 
     class Meta:
