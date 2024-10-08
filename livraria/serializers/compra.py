@@ -28,6 +28,7 @@ class CompraSerializer(ModelSerializer):
     status = CharField(source="get_status_display", read_only=True)
     itens = ItensCompraSerializer(many=True, read_only=True)
     total_compra = SerializerMethodField() 
+    data = serializers.DateTimeField(read_only=True)
     
     def get_total_compra(self, obj):
         total_compra = 0 
@@ -37,7 +38,7 @@ class CompraSerializer(ModelSerializer):
     
     class Meta:
         model = Compra
-        fields = ("id", "usuario", "status", "itens", "total_compra")
+        fields = ("id", "usuario", "status", "data", "itens", "total_compra")
 
 class CriarEditarItensCompraSerializer(ModelSerializer):
     class Meta: 
