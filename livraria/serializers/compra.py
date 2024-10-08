@@ -1,11 +1,14 @@
-from rest_framework.serializers import ModelSerializer, CharField
+from rest_framework.serializers import ModelSerializer, CharField, SerializerMethodField
 from livraria.models import Compra, ItensCompra
 
-
 class ItensCompraSerializer(ModelSerializer):
+    total = SerializerMethodField()
+    def get_total(self, instance):
+        return instance.quantidade * instance.livro.preco
+    
     class Meta: 
         model = ItensCompra
-        fields = ["livro", "quantidade"]
+        fields = ["livro", "quantidade", "total"]
         depth = 2   # depth=2 inlui detalhes dos relacionamentos, aumentando a profundidade da serialização.
                     # Se depth=1 fosse usado incluiria os detalhes dos relacionamentos diretos (pk's).
 
