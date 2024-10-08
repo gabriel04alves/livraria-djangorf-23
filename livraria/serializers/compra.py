@@ -52,3 +52,24 @@ class CriarEditarCompraSerializer(ModelSerializer):
         compra.save()
         return compra
     
+    # não funciona com patch 
+    def update(self, instance, validated_data):
+        itens_data = validated_data.pop("itens")
+        
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        for item_data in itens_data:
+            item_id = item_data.get("id")
+            if item_id:  
+                item = ItensCompra.objects.get(id=item_id, compra=instance)
+                item.quantidade = item_data.get("quantidade", item.quantidade)
+                item.livro = item_data.get("livro", item.livro)
+                item.save()
+            else:  
+                ItensCompra.objects.create(compra=instance, **item_data)
+
+        instance.save()
+        return instance
+
+
