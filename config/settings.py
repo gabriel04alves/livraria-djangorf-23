@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'uploader',
     'livraria',
     'rest_framework_simplejwt',
-    "django_filters"
+    "django_filters",
+    "django_extensions"
 ]
 
 MIDDLEWARE = [

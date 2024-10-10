@@ -18,6 +18,8 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "netifaces>=0.11.0",
     "django-filter>=24.3",
+    "django-extensions>=3.2.3",
+    "pydotplus>=2.0.2",
 ]
 requires-python = ">=3.12"
 readme = "README.md"
@@ -34,6 +36,7 @@ distribution = true
 [tool.pdm.scripts]
 pre_dev = "python ./scripts/set_my_ip.py"
 dev = "python manage.py runserver 0.0.0.0:19003"
+diagram = "python manage.py graph_models -g -o livraria.png livraria"
 createsuperuser = "python manage.py createsuperuser"
 pre_migrate = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
